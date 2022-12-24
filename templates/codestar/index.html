@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- {% load static %} -->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <title>Learn-With-Py Compiler</title>
+</head>
+
+<body>
+    <div class="header bg-dark">
+        <h2 style="color: #5cb85c;">Welcome Learners</h2>
+        <p style="color: white;">learn-with-py a complete platform to learn python</p>
+    </div>
+    <div class="sticky-top">
+        <div class="progress-container" style="position:relative">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark"
+            style="background-color: rgb(31, 31, 31);border-bottom:1px solid white;">
+            <div class="container-fluid">
+                <a href="http://learn-with-py.infinityfreeapp.com/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrMsJ3u6Q3exwCkfCg4TPDKaa-qtgQY8VwXg&usqp=CAU"
+                        class="img-fluid mx-2" alt="logo"
+                        style="height: 50px; width: 50px; border-radius: 50%; border: 2px solid #f0ad4e;" /></a>
+                <button class="navbar-toggler border-3 border-success" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="http://learn-with-py.infinityfreeapp.com/">Learn-With-Py</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active"
+                                href="http://learn-with-py.infinityfreeapp.com/example.html">Examples</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="http://learn-with-py.infinityfreeapp.com/video.html">Study
+                                Materials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="http://learn-with-py.infinityfreeapp.com/about.html">About
+                                Us</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-warning" href="https://sayon2000.pythonanywhere.com/" target="_blank">FAQ</a>
+                    <a class="btn btn-primary mx-3" href="http://learn-with-py.infinityfreeapp.com/"
+                        target="_blank">Home</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <section class="py-5 text-center border border-dark" style="background-color: rgb(220, 220, 253);">
+        <div class="row py-lg-5" style="justify-content: center; margin: auto;">
+            <div class="col-lg-6 col-md-8">
+                <h1 class="fw-light">Coding Playground</h1>
+                <p class="lead text-muted mx-auto">Make your concepts strong by writing and compiling your own code in our online python compiler. keep kearning and keep growing with us.</p>
+                <p>
+                    <a href="http://learn-with-py.infinityfreeapp.com/video.html"
+                        class="btn btn-success my-2 mx-2">Tutorials »</a>
+                    <a href="http://learn-with-py.infinityfreeapp.com/example.html" class="btn btn-dark my-2">Examples
+                        »</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="fw-light text-center py-3 mt-3">Write Your Code Here</h2>
+        <form action="/home/run" method="post" class="pt-3">
+            {% csrf_token %}
+            <textarea class="form-control bg-dark text-white shadow-lg p-3 mb-5 bg-body rounded"
+                placeholder="Write Your Code Here"
+                style="border:5px solid #5cb85c; letter-spacing: 1px; font-family: 'Lucida Console'; font-size: 15px;"
+                rows="18"
+                onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
+                name="code_area" id="message1">{{code}}</textarea>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-success" type="submit">Run Your Code</button>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button class="btn-sm btn-primary" id="buttonCopy">Copy Code</button>
+                        <button class="btn btn-dark" id="btn">Clear</button>
+                      </div>
+                </div>
+            <div class="row g-2 my-3">
+                <div class="col-md">
+                    <h5 class="text-primary">Your Input</h5>
+                    <div class="form-floating">
+                        <textarea class="form-control bg-dark text-white shadow-lg p-3 mb-5 bg-body rounded"
+                            id="floatingInputGrid" placeholder="Enter your input here"
+                            style="border:5px solid #5cb85c; letter-spacing: 1px; font-family: 'Lucida Console'; font-size: 15px; height:200px;"
+                            name="input_area" id="message2">{{input}}</textarea>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <h5 class="text-primary">Your Output</h5>
+                    <div class="form-floating">
+                        <textarea class="form-control bg-dark text-white shadow-lg p-3 mb-5 bg-body rounded"
+                            id="floatingInputGrid" placeholder="Get your output here"
+                            style="border:5px solid #5cb85c; letter-spacing: 1px; font-family: 'Lucida Console'; font-size: 15px; height:200px;"
+                            name="output_area" id="message3">{{output}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="d-flex justify-content-center bg-dark mt-5">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3" style="cursor: pointer;">
+                <li class="nav-item"><a href="http://learn-with-py.infinityfreeapp.com/"
+                        class="nav-link px-2 text-white">Home</a>
+                </li>
+                <li class="nav-item"><a href="http://learn-with-py.infinityfreeapp.com/about.html"
+                        class="nav-link px-2 text-white">About Us</a></li>
+                <li class="nav-item"><a href="tel:9330048442" class="nav-link px-2 text-white">Call Us</a></li>
+                <li class="nav-item"><a href="mailto:sayonislam.2000@gmail.com" class="nav-link px-2 text-white"
+                        target="_blank">Mail us</a></li>
+            </ul>
+            <p class="text-center text-white">© 2022 Learn-With-Py, Inc</p>
+        </footer>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () { myFunction() };
+
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        }
+    </script>
+    <script>
+        const textarea1 = document.getElementById('message1');
+        const textarea2 = document.getElementById('message2');
+        const textarea3 = document.getElementById('message3');
+        // textarea1.value = '';
+        // textarea2.value = '';
+        // textarea3.value = '';
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', function handleClick() {
+        textarea1.value = '';
+        textarea2.value = '';
+        textarea3.value = '';
+        });
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ccc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(2, 117, 216);
+            border: 1px solid black;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #5cb85c;
+            border: 1px solid black;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #ccc;
+            border: 1px solid black;
+        }
+
+        /* The progress bar (scroll indicator) */
+        .progress-bar {
+            height: 8px;
+            background: #5cb85c;
+            width: 0%;
+        }
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 40px;
+            text-align: center;
+        }
+
+        * {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+
+<script>
+    function myFunction10() {
+    const copyText = document.getElementById("message1").textContent;
+    const textArea = document.createElement('textarea');
+    textArea.textContent = copyText;
+    // document.body.append(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    }
+    document.getElementById('buttonCopy').addEventListener('click', myFunction10);
+    </script>
+</body>
+
+</html>
